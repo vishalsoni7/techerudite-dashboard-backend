@@ -11,12 +11,14 @@ const transporter = nodeMailer.createTransport({
 });
 
 const SendVerificationMail = async (email, subject, emailVerificationToken) => {
+  const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${emailVerificationToken}`;
+
   try {
     const res = await transporter.sendMail({
       from: '"Techerudite" <vishsoni043@gmail.com>',
       to: email,
       subject: `${subject} verification email`,
-      html: emailVerificationToken,
+      html: `Click <a href="${verificationLink}">here</a> to verify your email.`,
     });
 
     return res;

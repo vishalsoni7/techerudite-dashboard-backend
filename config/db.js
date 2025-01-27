@@ -12,11 +12,11 @@ const connectToDatabase = () => {
     console.error(`Environment variable not defined!`);
   }
   mongoose
-    // .connect(mongoURI)
-    // .then(() => console.log(`Connected to MongoDB`))
-    // .catch((error) => console.error(`Error connecting to MongoDB: ${error}`));
 
-    .connect(mongoURI)
+    .connect(mongoURI, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    })
     .then(() => console.log("Connected to MongoDB"))
     .catch((error) => {
       console.error("Error connecting to MongoDB: ", error);
